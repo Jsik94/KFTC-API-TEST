@@ -24,7 +24,9 @@
 												"gw_svc_id=faf66bd6cafdf009a37caaac77ba5194&gw_app_key=d39e6903-3e83-4995-977d-252215520364&response_type=code&"+
 												"client_id=d39e6903-3e83-4995-977d-252215520364&client_info=test&redirect_uri=http://localhost:9575/ktfctest/auth/authTest.do&"+
 												"scope=login+inquiry+transfer&auth_type=0&lang=kor&state=b80BLsfigm9OokPTjy03elbJqRHOfGSY&account_hold_auth_yn=N&register_info=A&authorized_cert_yn=Y&cellphone_cert_yn=Y "
-												var tmpWindow=window.open(nlocation,"",'_blank')
+												
+												var nlocation2 = "https://twww.openbanking.or.kr/apt/mobileweb/authorizeNewGW?sessionID=7f3a0a72-4d5a-4494-9aaa-783f19842564&action=Grant&api_tran_id=70876fa1-e2c2-48dd-a753-046bc542cf2d&gw_svc_id=faf66bd6cafdf009a37caaac77ba5194&gw_app_key=d39e6903-3e83-4995-977d-252215520364&response_type=code&client_id=d39e6903-3e83-4995-977d-252215520364&client_info=test&redirect_uri=http://localhost:9575/ktfctest/auth/authTest.do&scope=login+inquiry+transfer&auth_type=0&lang=kor&state=b80BLsfigm9OokPTjy03elbJqRHOfGSY&account_hold_auth_yn=N&register_info=A&authorized_cert_yn=Y&cellphone_cert_yn=Y"
+												var tmpWindow=window.open(nlocation2,"",'_blank,width=900,height=880,menubar=false')
 											})
 										</script>
 										
@@ -33,18 +35,25 @@
 										<br><p>여기에 데이터 박힘</p>
 										
 										<script>
-										
+
+										$('#getTest').on('click',function(){
+											//event.preventDefault();
+											
+											var nlocation = '<c:url value="/auth/RequestAuth.do"/>'
+											var tmpWindow=window.open(nlocation,"",'_blank,width=900,height=880,menubar=false')
+										})
 											$("#getAjax").on('click',function(){
 											
 												$.ajax({
 													url: '<c:url value="/auth/AuthCode.do"/>',
 													type: 'GET',
 													success:function(data){
+														console.log("메세지는 잘오고가는데 ?")
 														console.log(data);
 														console.log(data.location);
 													},
-													error:function(){
-														
+													error:function(e){
+														console.log(e)
 													}
 											
 												})
@@ -52,12 +61,6 @@
 											})
 											
 										
-											$('#getTest').on('click',function(){
-												//event.preventDefault();
-												
-												var nlocation = '<c:url value="/auth/RequestAuth.do"/>'
-												var tmpWindow=window.open(nlocation,"",'_blank,width=900,height=880,menubar=false')
-											})
 										</script>
 									</div>
 									<br/><br/><br/><br/><br/>

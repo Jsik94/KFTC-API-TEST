@@ -29,13 +29,14 @@ public class AuthRestController {
 	public Map getAuthCode() {
 		System.out.println("<============ Autho 인증 로직  ===================>");
 		HttpHeaders headers = new HttpHeaders();
-		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
-		headers.setAccessControlAllowOrigin("*");
-		headers.setAccessControlAllowCredentials(true);
+////		headers.setContentType(MediaType.APPLICATION_JSON_UTF8);
+//		headers.setAccessControlAllowOrigin("*");
+//		headers.setAccessControlAllowCredentials(true);
 		HttpEntity entity = new HttpEntity(headers);
 		
 		String url = "https://developers.kftc.or.kr/proxy/oauth/2.0/authorize?response_type=code&client_id=d39e6903-3e83-4995-977d-252215520364&redirect_uri=http%3A%2F%2Flocalhost%3A9575%2Fktfctest%2Fauth%2FauthTest.do&scope=login%20inquiry%20transfer&client_info=test&state=b80BLsfigm9OokPTjy03elbJqRHOfGSY&auth_type=0&cellphone_cert_yn=Y&authorized_cert_yn=Y&account_hold_auth_yn=N&register_info=A";
-		System.out.println(url);
+		url ="https://developers.kftc.or.kr/proxy/oauth/2.0/authorize?response_type=code&client_id=d39e6903-3e83-4995-977d-252215520364&redirect_uri=https%3A%2F%2F17b8-221-149-140-189.ngrok.io%2Fktfctest%2Fauth%2FauthTest.do&scope=login%20inquiry%20transfer&client_info=test&state=b80BLsfigm9OokPTjy03elbJqRHOfGSY&auth_type=0&cellphone_cert_yn=Y&authorized_cert_yn=Y&account_hold_auth_yn=N&register_info=A";
+		System.out.println("url : "+url);
 		ResponseEntity<Map> response = config.restTemplate().exchange(
 				url,
 				HttpMethod.GET, 
@@ -52,10 +53,6 @@ public class AuthRestController {
 			
 			System.out.println((String)entry + " - " + response.getBody().get(entry));
 		}
-//		String loc = response.getHeaders().getLocation().toASCIIString();
-//		System.out.println("얘가말하는 Loc 함수 :" +loc);
-//		String myLoc = response.getHeaders().get("Location").get(0);
-//		System.out.println("내가 찾아본 Loc :" +myLoc);
 		Map map = new HashMap();
 		map.put("location", "dtd");
 		return map;
@@ -98,7 +95,7 @@ public class AuthRestController {
 		
 			같은 url 인데 포스트맨은 되고 왜 프로젝트는 안될까 ? -->강사님께 질문던지자
 		*/
-		System.out.println("갔다왔습니다~");
+		System.out.println("갔다왔습니다~!");
 		for(Object entry : response.getBody().keySet()) {
 		
 			System.out.println((String)entry + " - " + response.getBody().get(entry));
