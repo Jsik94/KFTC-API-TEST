@@ -41,16 +41,22 @@
 											
 											var nlocation = '<c:url value="/auth/RequestAuth.do"/>'
 											var tmpWindow=window.open(nlocation,"",'_blank,width=900,height=880,menubar=false')
-										})
-											$("#getAjax").on('click',function(){
 											
+										})
+										
+										$("#getAjax").on('click',function(){
+												console.log("Ajax 수행")
+												console.log('타겟 요청','<c:url value="/auth/AuthToken.do"/>')
 												$.ajax({
-													url: '<c:url value="/auth/AuthCode.do"/>',
+													url: '<c:url value="/auth/AuthToken.do"/>',
 													type: 'GET',
+													dataType: 'json',
 													success:function(data){
 														console.log("메세지는 잘오고가는데 ?")
 														console.log(data);
 														console.log(data.location);
+														
+														var tmpWindow=window.open(data.location,"",'_blank,width=900,height=880,menubar=false')
 													},
 													error:function(e){
 														console.log(e)
@@ -92,19 +98,15 @@
 																	<script>
 																		$("#getTokenAjax").click(function(){
 																			console.log('ajax로 수행합니다.');
-																			console.log($('#clientId').val())
+																			console.log($('#getTestResult').val())
 													
 																			$.ajax({
-																				url: '<c:url value="/auth/AuthToken.do"/>',
+																				url: '<c:url value="/auth/getToken.do"/>',
 																				type: 'POST',
 																				data:JSON.stringify({
-																					  "code": $("#getTestResult").val(),
-																					  "client_id": $('#clientId').val(),
-																					  "client_secret": $('#clientSecret').val(),
-																					  "redirect_uri": $('#redirectUrl').val(),
-																					  "grant_type": "authorization_code"
+																					  "code": $("#getTestResult").val()
 																					}),
-																				//dataType:'json',
+																				dataType:'json',
 																				contentType: "application/json;",
 																				success:function(data){
 																					console.log(data);
